@@ -27,6 +27,8 @@ public class Player : Singleton<Player>
     // Player movement speed
     [SerializeField]
     private float speed = 0;
+    [SerializeField]
+    private GameObject projectilePrefab = null;
     
     // A temporary vector indicating the movement direction
     private Vector2 moveVector;
@@ -97,6 +99,18 @@ public class Player : Singleton<Player>
         }
     }
 
+     public GameObject ProjectilePrefab
+    {
+        get
+        {
+            return projectilePrefab;
+        }
+        set
+        {
+            this.projectilePrefab = value;
+        }
+    }
+
     /****************************************************/
 
     /****************************************************/
@@ -109,6 +123,7 @@ public class Player : Singleton<Player>
         health = maxHealth;
         // Get current rigidbody2d object
         rb2d = GetComponent<Rigidbody2D>();
+        StartCoroutine(ShootProjectile());
     }
 
     // Update is called once per frame
@@ -118,7 +133,15 @@ public class Player : Singleton<Player>
         UpdatePosition();
     }
 
-
+    /*Experiment to see if projectiles are destroyed upon hitting wall
+    Player shoots a projectile upwards every {shootCooldown} seconds*/
+    IEnumerator ShootProjectile(){
+        while (true){
+            yield return new WaitForSeconds(3.0f);
+            GameObject projectile = Instantiate(projectilePrefab, (Vector2)this.transform.position + Vector2.up, Quaternion.identity) as GameObject;
+            projectile.GetComponent<Projectile>().SetTrajectory(Vector2.up);
+        }
+    }
 
     // Move physical position upon update
     private void UpdatePosition()

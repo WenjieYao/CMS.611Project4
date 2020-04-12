@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 145442171}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1269,6 +1269,8 @@ MonoBehaviour:
   attackPower: 0
   fireRate: 0
   speed: 5
+  projectilePrefab: {fileID: 6509681810872337612, guid: ebe70528cc7c64c0b982498bfdc9a6d3,
+    type: 3}
 --- !u!50 &1012920682
 Rigidbody2D:
   serializedVersion: 4
