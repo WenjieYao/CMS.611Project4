@@ -3174,6 +3174,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8818376122633611144, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
+        type: 3}
+      propertyPath: sword
+      value: 
+      objectReference: {fileID: 3792277620117432578, guid: aeb5f42dc12ee8d46802034b6034db5d,
+        type: 3}
     - target: {fileID: 8904423089469214288, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3192,17 +3198,17 @@ PrefabInstance:
     - target: {fileID: 8904423089469214288, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904423089469214288, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904423089469214288, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904423089469214288, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
         type: 3}
@@ -3227,6 +3233,26 @@ PrefabInstance:
     - target: {fileID: 8904423089469214288, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904423089469214290, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904423089469214290, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904423089469214290, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904423089469214291, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
+        type: 3}
+      propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8904423089469214292, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
@@ -3377,6 +3403,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChampY
       objectReference: {fileID: 0}
+    - target: {fileID: 127243320826821725, guid: a4169a83ba49b48fabecaa337bf8140d,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 127243320826821725, guid: a4169a83ba49b48fabecaa337bf8140d,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 127243320826821725, guid: a4169a83ba49b48fabecaa337bf8140d,
+        type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 127243320826821725, guid: a4169a83ba49b48fabecaa337bf8140d,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 127243320826821727, guid: a4169a83ba49b48fabecaa337bf8140d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3432,6 +3478,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8217507242140481719, guid: a4169a83ba49b48fabecaa337bf8140d,
+        type: 3}
+      propertyPath: sword
+      value: 
+      objectReference: {fileID: 3792277620117432578, guid: aeb5f42dc12ee8d46802034b6034db5d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4169a83ba49b48fabecaa337bf8140d, type: 3}
 --- !u!1 &2116024256

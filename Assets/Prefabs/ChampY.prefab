@@ -146,8 +146,9 @@ MonoBehaviour:
   playerCanControl: 0
   maxHealth: 0
   health: 0
-  attackPower: 0
+  attackPower: 2
   fireRate: 0
   speed: 5
+  direction: 0
   projectilePrefab: {fileID: 6509681810872337612, guid: ebe70528cc7c64c0b982498bfdc9a6d3,
     type: 3}

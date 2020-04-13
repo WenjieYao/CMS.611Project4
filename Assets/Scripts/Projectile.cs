@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     /***************** Basic Properties *****************/
     /****************************************************/
 	[SerializeField]
-	private float velocity = 2.0f;
+	private float velocity = 8.0f;
 	// A normalized vector representing the projectile's trajectory
 	private Vector2 trajectory;
 
