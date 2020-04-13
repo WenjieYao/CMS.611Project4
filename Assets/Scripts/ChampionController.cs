@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Cinemachine;
 
 /****************************************************/
 // The Player script is used for defining player
@@ -12,6 +13,7 @@ public class ChampionController : Singleton<ChampionController>
     /****************************************************/
     public Champion[] champions;
     public int activeChampionIdx = 0;
+    public CinemachineVirtualCamera activeChampionCamera;
     /****************************************************/
 
     /****************************************************/
@@ -24,7 +26,7 @@ public class ChampionController : Singleton<ChampionController>
         {
             champ.playerCanControl = false;
         }
-        champions[activeChampionIdx].playerCanControl = true;
+        setActiveChampion(0);
     }
 
     // Update is called once per frame
@@ -33,10 +35,15 @@ public class ChampionController : Singleton<ChampionController>
         // Spacebar increments the activeChampionIdx;
         if (Input.GetKeyUp("space"))
         {
-            champions[activeChampionIdx].playerCanControl = false;
-            activeChampionIdx += 1;
-            activeChampionIdx %= champions.Length;
-            champions[activeChampionIdx].playerCanControl = true;
+            setActiveChampion((activeChampionIdx + 1) % champions.Length);
         }
+    }
+
+    private void setActiveChampion(int idx)
+    {
+        champions[activeChampionIdx].playerCanControl = false;
+        activeChampionIdx = idx;
+        champions[activeChampionIdx].playerCanControl = true;
+        activeChampionCamera.Follow = champions[activeChampionIdx].transform;
     }
 }
