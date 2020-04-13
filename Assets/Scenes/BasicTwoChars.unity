@@ -942,7 +942,7 @@ MonoBehaviour:
   - {fileID: 1044901599}
   - {fileID: 374612905}
   activeChampionIdx: 0
-  vcam: {fileID: 0}
+  activeChampionCamera: {fileID: 589435246}
 --- !u!4 &364691156
 Transform:
   m_ObjectHideFlags: 0
