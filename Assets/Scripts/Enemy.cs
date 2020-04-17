@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     private int maxHealth = 5;
     [SerializeField]
     private int attackPower = 1;
+    private bool sensedTarget = false;
 
 	public GameObject Target
 	{
@@ -96,21 +97,38 @@ public class Enemy : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
-    {
-    	Vector2 moveDirection = (Vector2)(target.transform.position - transform.position);
-    	rigidbody2D.MovePosition(rigidbody2D.position + moveDirection * speed * Time.fixedDeltaTime);
+    {   
+            //Once target has been sensed, move to target. This happens even if the character moves out of range again.
+            if(sensedTarget)
+            {
+                Vector2 moveDirection = (Vector2)(target.transform.position - transform.position);
+                rigidbody2D.MovePosition(rigidbody2D.position + moveDirection * speed * Time.fixedDeltaTime);
+                //sensedTarget = false;
+            }
+
     }
 
 
-    private void OnCollisionStay2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         GameObject collisionGameObj = collision.gameObject;
-        //Debug.Log(collisionGameObj);
 
         //if enemy hits player, inflict damage on champion
-        if(collisionGameObj.GetComponent<Champion>() != null){
+        if(collisionGameObj.GetComponent<Champion>() != null)
+        {
             collisionGameObj.GetComponent<Champion>().DealChampionDamage(attackPower);
         }
+    }
 
+    void OnTriggerStay2D(Collider2D other)
+    {
+        GameObject collisionGameObj = other.gameObject;
+
+
+        //Handles circle collider behavior. If enemy is in range of target, enable moving to target
+        if(collisionGameObj == target)
+        {
+            sensedTarget = true;
+        }
     }
 }

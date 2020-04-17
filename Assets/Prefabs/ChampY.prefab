@@ -153,3 +153,4 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6509681810872337612, guid: ebe70528cc7c64c0b982498bfdc9a6d3,
     type: 3}
   sword: {fileID: 0}
+  maxDmgCooldown: 1
