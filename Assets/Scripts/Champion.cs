@@ -21,6 +21,10 @@ public class Champion : MonoBehaviour
     private GameObject newsword;
     public GameObject projectilePrefab;
     public GameObject sword;
+    private float dmgCooldownTimer;
+    [SerializeField]
+    private float maxDmgCooldown = 0.5f;
+
     /****************************************************/
 
     /****************************************************/
@@ -31,6 +35,8 @@ public class Champion : MonoBehaviour
     {
         // Initialze player with full health
         health = maxHealth;
+        // Initialize cooldown timer to start at its max value
+        dmgCooldownTimer = maxDmgCooldown;
 
         StartCoroutine(ShootProjectile());
     }
@@ -137,5 +143,24 @@ public class Champion : MonoBehaviour
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.MovePosition(rb.position + speed * moveVector * Time.fixedDeltaTime);
+    }
+
+    //Champion takes {damage} damage to health at most once per maxDmgCooldown
+    public void DealChampionDamage(int damage){
+        dmgCooldownTimer -= Time.fixedDeltaTime;
+        if (dmgCooldownTimer <= 0){
+            health -= damage;
+            Debug.Log(health + "/" + maxHealth);
+            if (health < 0){
+                Die();
+            }
+            dmgCooldownTimer = maxDmgCooldown;
+        }
+    }
+
+    //TODO: Trigger Game Over popup
+    void Die(){
+        health = 0;
+        Debug.Log("Died");
     }
 }
