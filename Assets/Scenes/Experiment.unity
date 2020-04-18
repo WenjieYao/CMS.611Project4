@@ -225,8 +225,6 @@ GameObject:
   m_Component:
   - component: {fileID: 115380804}
   - component: {fileID: 115380809}
-  - component: {fileID: 115380808}
-  - component: {fileID: 115380807}
   - component: {fileID: 115380806}
   - component: {fileID: 115380805}
   m_Layer: 0
@@ -283,43 +281,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 5
---- !u!50 &115380807
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115380803}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!58 &115380808
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115380803}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.48
 --- !u!212 &115380809
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1388,8 +1349,6 @@ GameObject:
   m_Component:
   - component: {fileID: 335018201}
   - component: {fileID: 335018202}
-  - component: {fileID: 335018203}
-  - component: {fileID: 335018204}
   - component: {fileID: 335018206}
   - component: {fileID: 335018205}
   m_Layer: 0
@@ -1463,43 +1422,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &335018203
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335018200}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.48
---- !u!50 &335018204
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335018200}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &335018205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,6 +1527,7 @@ GameObject:
   - component: {fileID: 403954432}
   - component: {fileID: 403954430}
   - component: {fileID: 403954431}
+  - component: {fileID: 403954433}
   m_Layer: 0
   m_Name: EnemyY1
   m_TagString: Untagged
@@ -1705,6 +1628,22 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!58 &403954433
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403954428}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &460204088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,12 +1707,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACYn+trxk9LaQIAAA4FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMty4jAQ/BVK54WyjTBkb7sOIXvIo0K2cvFF2GOsQpZckhwgKf59R7KJHe8J0T2PntbIn4RLU0Nmld5onj+oHMjPCXFn8mPSk/dwYnslt/wDrjFvPLelC2I+5oVZrhAPXZpRFVjNs19yL1xwgGAjeaF0tc73kChjDcIFEwaQ0sq6bInQ54Sc8Gd641LOeIqW7vSBp5tgcsFjBtKCHoRGsziOF9E8putpsOzSrkmLWbyicxqtp+HcpzcyE6yqIXez9FWiqEsMVz5M4pRdhJsoU0Jw00kk9lx7CxJWmwYHxICcMxzZ6wpncwRK4PvSusrD9KeiMGA7fZqdb7lG79q65LdqDa2YObTK3ploXKdoEXtVbdGH//hp6OlCq+r+2jcMXA9b8uzwws4ZM3bg+BC+HUj3Bh2ZOLCdgLcS5KPaaNXIHEmrG5faGIhu+79foyUlZIceb6WOwKbuHQ9GN+VmuPjpT4ng1c5RM9oCW6G8434rQOPd/EHBfmdMVwJRp+KvgVe2Hy5XR9xxbSxS3ZTSydupRrtQsvaeuWkamygtwcOd6BokE/b8jGXs+ApH3KDtiLlj7hl1zTvu+jpGKR7u44NgRD2r49dlmVIdH8CUT40VXEIv2hGP6FOipGw3bOjJNW3b6IJlg7R9w/Pvq0UgoHTJ4nBHKaN0tZrGYUFpQG9gvlxEy92c+N3jEudk4rkV2tmDtzb0ROKiXT8vk41mtV/3XLPjhn9UauA5l4XaZhpAPn0vYUBjF3yY+Trn6NAWrOXSXzj5TIlQ2QHy9KtQ6kddn6xmaV8lJTV/V9YhKUn89yQlF3L5B1BLAwQUAAAICAAAmJ/rUBmmRm0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0UqqBiYl5oplhkolJoomJhYWumWGaiYmBiWWqsbmpkXmSsVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAmJ/ra8ZPS2kCAAAOBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAmJ/rUBmmRm0AAAB4AAAACQAkAAAAAAAAAAAAAAC2AgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAG4DAAAAAA==
+    dataString: UEsDBBQAAAgIAACYn+sPh2oaawIAAA0FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMziVjG2Ggt9YhpId8TGgnF1+EvcYaZMkjyQGS4b93JRvsuifE2327b59W/iJcmhoyq/RG8/xJ5UC+T4g7k2+TPvgIJ7ZXcss/4ZrzznNbuiTmc96Y5Qrx0NGMqsBqnv2Qe+GSAwQbyQulq3W+h0QZaxAumDCAIa2sY0uEvibkhD/TlaOc8RQt3OkTT6tgcsFjBtKCHqRGd3Ecz6NZTNfTYNHRrqT5XbykMxqtp+HM0xuZCVbVkLtZ+ipR1BHDpU+TOGWX4SbKlBDcdBKJPdfegoTVpsEBMSHnDEf2uoK7FQIl8H1pXeUh/aUoDNhOn2bne67Ru7Yu+alaQytmDq2yDyYa1ymax15VW/Tpv/g09OFCq+rx2jcMXA9b8uzwxs4ZM3bg+BC+76WH3qAjEwe2E/BegnxWG60amWPQ6sZRGwPRff/3NlpSQnbo8VbqCGzq3vFgdFNuhouf/pQIXu28k7QFtkJ5x/1WgMa7+YWC/c6YrgSiTsUfA7/ZfrhcXeCBa2Mx1E0pnbydarRLJWvvmZumsYnSEjzcia5BMmHPr1jGjq9wFBu0HUUemHtGXfMudn0dI4qH+/wgGIVe1fF2WaZUxycw5UtjBZfQi3aBZ/QpUVK2Gzb05ErbNrpg2YC2b3j+72oRCChdsDjcUcooXS6ncVhQGtAVzBbzaLGbEb97XOKcTLy2Qjt78NZkX1zinl2/LpONZrXf9lyz44Z/VmpgOZeF2mYaQL60FW7CQWMTfJf5Oudo0Bas5dLfN/lKiVDZAfL0Vij1k65PVrO0r5KSmn8o65CUJP5zkpILufwFUEsDBBQAAAgIAACYn+tQGaZGbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM01VFQSi9KLMgoBooYgjilmSkgdrRSqoGJiXmimWGSiUmiiYmFha6ZYZqJiYGJZaqxuamReZKxUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACYn+sPh2oaawIAAA0FAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACYn+tQGaZGbQAAAHgAAAAJACQAAAAAAAAAAAAAALgCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAcAMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
-  showNavGraphs: 0
+  showNavGraphs: 1
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
@@ -6089,6 +6028,7 @@ GameObject:
   - component: {fileID: 1660522835}
   - component: {fileID: 1660522834}
   - component: {fileID: 1660522836}
+  - component: {fileID: 1660522837}
   m_Layer: 0
   m_Name: EnemyP1
   m_TagString: Untagged
@@ -6189,6 +6129,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 1672233380}
+--- !u!58 &1660522837
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660522832}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1001 &1672233379
 PrefabInstance:
   m_ObjectHideFlags: 0
