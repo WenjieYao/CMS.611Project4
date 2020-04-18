@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 /****************************************************/
 // The Enemy script is used for defining enemy
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     // Enemy's attacking target
 	[SerializeField]
 	private GameObject target = null;
+    public AIPath aiPath;
 	// Current rigidbody2d object
     private Rigidbody2D rigidbody2D;
     //Enemy movement speed
@@ -101,8 +103,9 @@ public class Enemy : MonoBehaviour
             //Once target has been sensed, move to target. This happens even if the character moves out of range again.
             if(sensedTarget)
             {
-                Vector2 moveDirection = (Vector2)(target.transform.position - transform.position);
-                rigidbody2D.MovePosition(rigidbody2D.position + moveDirection * speed * Time.fixedDeltaTime);
+                aiPath.canSearch = true;
+                //Vector2 moveDirection = (Vector2)(target.transform.position - transform.position);
+                //rigidbody2D.MovePosition(rigidbody2D.position + moveDirection * speed * Time.fixedDeltaTime);
                 //sensedTarget = false;
             }
 
