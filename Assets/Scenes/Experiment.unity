@@ -6322,6 +6322,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8904423089469214292, guid: 9e4e6b929dffd41c1a32fce6508f9bd5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e4e6b929dffd41c1a32fce6508f9bd5, type: 3}
 --- !u!4 &1672233380 stripped
@@ -6575,6 +6580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 127243320826821713, guid: a4169a83ba49b48fabecaa337bf8140d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 127243320826821725, guid: a4169a83ba49b48fabecaa337bf8140d,
         type: 3}
