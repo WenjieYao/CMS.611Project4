@@ -146,12 +146,15 @@ public class Champion : MonoBehaviour
     }
 
     //Champion takes {damage} damage to health at most once per maxDmgCooldown
-    public void DealChampionDamage(int damage){
+    public void DealChampionDamage(int damage)
+    {
         dmgCooldownTimer -= Time.fixedDeltaTime;
-        if (dmgCooldownTimer <= 0){
+        if (dmgCooldownTimer <= 0)
+        {
             health -= damage;
             Debug.Log(health + "/" + maxHealth);
-            if (health < 0){
+            if (health < 0)
+            {
                 Die();
             }
             dmgCooldownTimer = maxDmgCooldown;
@@ -159,7 +162,8 @@ public class Champion : MonoBehaviour
     }
 
     //TODO: Trigger Game Over popup
-    void Die(){
+    void Die()
+    {
         health = 0;
         Debug.Log("Died");
     }
