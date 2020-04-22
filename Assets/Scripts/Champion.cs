@@ -1,30 +1,36 @@
-using System.Collections;
 using UnityEngine;
 
-/****************************************************/
-// The Player script is used for defining player
-// properties and player behaviors
-/****************************************************/
+/*
+ * The Player script is used for defining player
+ * properties and player behaviors.
+ */
 public class Champion : MonoBehaviour
 {
     /****************************************************/
     /***************** Basic Properties *****************/
     /****************************************************/
     public bool playerCanControl; // can be controlled by player
-    private int shoot = 0;
-    public int maxHealth;
-    public int health; // current health
-    public int attackPower;
-    public float fireRate; // Number of bullets fired per second
-    public float speed = 1; // movement speed
-    public int direction = 0;
-    private GameObject newsword;
-    public GameObject projectilePrefab;
-    public GameObject sword;
-    private float dmgCooldownTimer;
-    [SerializeField]
-    private float maxDmgCooldown = 0.5f;
 
+    public float translateForce = 50;
+    public float torqueForce = 5;
+
+    public int maxHealth;
+    public int curHealth; // current health
+
+    private float dmgCooldownTimer;
+    public float dmgCooldownSecs = 0.5f; // time invulnerable after taking damge
+
+    public enum Weapon { Gun, Sword };
+    public Weapon championWeapon;
+
+    public GameObject bulletPrefab;
+    public float gunCooldownSecs = 0.25f; // how long to wait per shot
+    private float gunCooldownLeft = 0;
+
+    public GameObject swordPrefab;
+    public float swordExistSecs = 0.75f;
+    public float swordCooldownSecs = 1f;
+    private float swordCooldownLeft = 0;
     /****************************************************/
 
     /****************************************************/
@@ -33,138 +39,98 @@ public class Champion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Initialze player with full health
-        health = maxHealth;
-        // Initialize cooldown timer to start at its max value
-        dmgCooldownTimer = maxDmgCooldown;
+        // Initialize player with full health
+        curHealth = maxHealth;
 
-        StartCoroutine(ShootProjectile());
+        // Invulnerable when spawned.
+        dmgCooldownTimer = dmgCooldownSecs;
     }
 
     void FixedUpdate()
     {
         // Only handle player input if playerCanControl
-        if (playerCanControl)
-        {
-            HandlePlayerControls();
-        }
+        if (playerCanControl) { HandlePlayerControls(); }
     }
 
-    /*
-     * Experiment to see if projectiles are destroyed upon hitting wall
-     * Player shoots a projectile upwards every {shootCooldown} seconds
-     */
-    private IEnumerator ShootProjectile()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(3.0f);
-            //GameObject projectile = Instantiate(projectilePrefab, (Vector2)this.transform.position + Vector2.up, Quaternion.identity) as GameObject;
-            //projectile.GetComponent<Projectile>().SetTrajectory(Vector2.up);
-            //print("Spawned projectile");
-        }
-    }
-
-    // Move physical position based on player controls
     private void HandlePlayerControls()
     {
-        shoot = shoot - 1;
-        if (shoot <= 0) { Destroy(newsword); }
-        Vector2 moveVector = new Vector2(0, 0);
-        if (shoot <= 0 || attackPower == 1)
+        // Handle translational movement
+        Vector2 translateDir = new Vector2(0, 0);
+        if (Input.GetKey("w")) { translateDir += Vector2.up; }
+        if (Input.GetKey("a")) { translateDir += Vector2.left; }
+        if (Input.GetKey("s")) { translateDir += Vector2.down; }
+        if (Input.GetKey("d")) { translateDir += Vector2.right; }
+        // The 100 factor here should stay constant.
+        // Change mass to change movement speed.
+        translateDir.Normalize();
+        GetComponent<Rigidbody2D>().AddForce(translateForce * translateDir);
+
+        // Handle rotational movement
+        float torqueDir = 0;
+        if (Input.GetKey("q")) { torqueDir += 1; }
+        if (Input.GetKey("e")) { torqueDir -= 1; }
+        GetComponent<Rigidbody2D>().AddTorque(torqueForce * torqueDir);
+
+        // Handle attacks
+        if (championWeapon == Weapon.Gun)
         {
-            if (Input.GetKey("w"))
+            gunCooldownLeft -= Time.fixedDeltaTime;
+            if (gunCooldownLeft <= 0) // able to fire gun
             {
-                moveVector += Vector2.up; direction = 0;
-                transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-            if (Input.GetKey("s"))
-            {
-                moveVector += Vector2.down; direction = 2;
-                transform.localRotation = Quaternion.Euler(0, 0, 180);
-            }
-            if (Input.GetKey("a"))
-            {
-                moveVector += Vector2.left; direction = 3;
-                transform.localRotation = Quaternion.Euler(0, 0, 90);
-            }
-            if (Input.GetKey("d"))
-            {
-                moveVector += Vector2.right; direction = 1;
-                transform.localRotation = Quaternion.Euler(0, 0, 270);
-            }
-            if (Input.GetKey("x") && shoot <= 0 && attackPower == 1)
-            {
-                if (direction == 0)
+                if (Input.GetKey("j"))
                 {
-                    GameObject projectile = Instantiate(projectilePrefab, (Vector2)this.transform.position + Vector2.up, Quaternion.identity) as GameObject;
-                    projectile.GetComponent<Projectile>().SetTrajectory(Vector2.up);
+                    // this.transform.up is the direction the player faces
+                    Projectile bullet = Instantiate(
+                        bulletPrefab,
+                        this.transform.position + this.transform.up,
+                        Quaternion.identity
+                    ).GetComponent<Projectile>();
+                    bullet.SetTrajectory(this.transform.up);
+                    gunCooldownLeft = gunCooldownSecs;
                 }
-                if (direction == 1)
-                {
-                    GameObject projectile = Instantiate(projectilePrefab, (Vector2)this.transform.position + Vector2.right, Quaternion.identity) as GameObject;
-                    projectile.GetComponent<Projectile>().SetTrajectory(Vector2.right);
-                }
-                if (direction == 2)
-                {
-                    GameObject projectile = Instantiate(projectilePrefab, (Vector2)this.transform.position + Vector2.down, Quaternion.identity) as GameObject;
-                    projectile.GetComponent<Projectile>().SetTrajectory(Vector2.down);
-                }
-                if (direction == 3)
-                {
-                    GameObject projectile = Instantiate(projectilePrefab, (Vector2)this.transform.position + Vector2.left, Quaternion.identity) as GameObject;
-                    projectile.GetComponent<Projectile>().SetTrajectory(Vector2.left);
-                }
-                print("Spawned projectile");
-                shoot = 30;
-            }
-            if (Input.GetKey("x") && shoot <= 0 && attackPower != 1)
-            {
-                if (direction == 0)
-                {
-                    newsword = Instantiate(sword, (Vector2)this.transform.position + Vector2.up, Quaternion.identity) as GameObject;
-                }
-                if (direction == 1)
-                {
-                    newsword = Instantiate(sword, (Vector2)this.transform.position + Vector2.right, Quaternion.Euler(0, 0, 270)) as GameObject;
-                }
-                if (direction == 2)
-                {
-                    newsword = Instantiate(sword, (Vector2)this.transform.position + Vector2.down, Quaternion.Euler(0, 0, 180)) as GameObject;
-                }
-                if (direction == 3)
-                {
-                    newsword = Instantiate(sword, (Vector2)this.transform.position + Vector2.left, Quaternion.Euler(0, 0, 90)) as GameObject;
-                }
-                shoot = 20;
             }
         }
-        moveVector.Normalize();
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.MovePosition(rb.position + speed * moveVector * Time.fixedDeltaTime);
+        else if (championWeapon == Weapon.Sword)
+        {
+            swordCooldownLeft -= Time.fixedDeltaTime;
+            if (swordCooldownLeft <= 0) // able to attack with sword
+            {
+                if (Input.GetKey("j"))
+                {
+                    // this.transform.up is the direction the player faces
+                    GameObject sword = Instantiate(
+                        swordPrefab,
+                        this.transform.position + this.transform.up,
+                        this.transform.rotation
+                    );
+                    sword.transform.SetParent(this.transform); // lock relative position to champion
+                    Destroy(sword, swordExistSecs); // destroy after swordExistSecs
+                    swordCooldownLeft = swordCooldownSecs;
+                }
+            }
+        }
     }
 
-    //Champion takes {damage} damage to health at most once per maxDmgCooldown
+    // Champion takes {damage} damage to health at most once per maxDmgCooldown
     public void DealChampionDamage(int damage)
     {
         dmgCooldownTimer -= Time.fixedDeltaTime;
         if (dmgCooldownTimer <= 0)
         {
-            health -= damage;
-            Debug.Log(health + "/" + maxHealth);
-            if (health < 0)
+            curHealth -= damage;
+            Debug.Log(curHealth + "/" + maxHealth);
+            if (curHealth < 0)
             {
                 Die();
             }
-            dmgCooldownTimer = maxDmgCooldown;
+            dmgCooldownTimer = dmgCooldownSecs;
         }
     }
 
-    //TODO: Trigger Game Over popup
     void Die()
     {
-        health = 0;
+        curHealth = 0;
         Debug.Log("Died");
+        // TODO: Trigger Game Over popup
     }
 }
