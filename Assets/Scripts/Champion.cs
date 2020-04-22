@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 /*
  * The Player script is used for defining player
@@ -13,6 +14,10 @@ public class Champion : MonoBehaviour
 
     public float translateForce = 50;
     public float torqueForce = 5;
+
+    public Tilemap iceMap;
+    public float iceDrag = 1;
+    private float originalDrag;
 
     public int maxHealth;
     public int curHealth; // current health
@@ -44,6 +49,9 @@ public class Champion : MonoBehaviour
 
         // Invulnerable when spawned.
         dmgCooldownTimer = dmgCooldownSecs;
+
+        // Set originalDrag
+        originalDrag = GetComponent<Rigidbody2D>().drag;
     }
 
     void FixedUpdate()
@@ -63,7 +71,21 @@ public class Champion : MonoBehaviour
         // The 100 factor here should stay constant.
         // Change mass to change movement speed.
         translateDir.Normalize();
-        GetComponent<Rigidbody2D>().AddForce(translateForce * translateDir);
+
+        if (iceMap.HasTile(iceMap.WorldToCell(this.transform.position)))
+        {
+            // reduce drag on ice
+            GetComponent<Rigidbody2D>().drag = iceDrag;
+            // reduce force proportionally so max-velocity is maintained.
+            GetComponent<Rigidbody2D>().AddForce(
+                (iceDrag / originalDrag) * translateForce * translateDir
+            );
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().drag = originalDrag;
+            GetComponent<Rigidbody2D>().AddForce(translateForce * translateDir);
+        }
 
         // Handle rotational movement
         float torqueDir = 0;
