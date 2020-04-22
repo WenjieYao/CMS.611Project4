@@ -121,15 +121,25 @@ public class Enemy : MonoBehaviour
         {
             collisionGameObj.GetComponent<Champion>().DealChampionDamage(attackPower);
         }
+        if (collision.gameObject.CompareTag("projectile") && this.CompareTag("enemyblue"))
+        {
+            health = health - 1;
+            if (health <= 0)
+            { Destroy(gameObject); }
+        }
+        if (collision.gameObject.CompareTag("attack") && this.CompareTag("enemygreen"))
+        {
+            health = health - 3;
+            if (health <= 0)
+            { Destroy(gameObject); }
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         GameObject collisionGameObj = other.gameObject;
-
-
         //Handles circle collider behavior. If enemy is in range of target, enable moving to target
-        if(collisionGameObj == target)
+        if (collisionGameObj == target)
         {
             sensedTarget = true;
         }
