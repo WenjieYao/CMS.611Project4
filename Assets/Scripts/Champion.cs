@@ -87,11 +87,14 @@ public class Champion : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(translateForce * translateDir);
         }
 
-        // Handle rotational movement
-        float torqueDir = 0;
-        if (Input.GetKey("q")) { torqueDir += 1; }
-        if (Input.GetKey("e")) { torqueDir -= 1; }
-        GetComponent<Rigidbody2D>().AddTorque(torqueForce * torqueDir);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        GetComponent<Rigidbody2D>().MoveRotation(
+            Quaternion.LookRotation(
+                forward: Vector3.forward,
+                upwards: mousePos - transform.position
+            )
+        );
 
         // Handle attacks
         if (championWeapon == Weapon.Gun)
@@ -99,7 +102,7 @@ public class Champion : MonoBehaviour
             gunCooldownLeft -= Time.fixedDeltaTime;
             if (gunCooldownLeft <= 0) // able to fire gun
             {
-                if (Input.GetKey("j"))
+                if (Input.GetMouseButton(0))
                 {
                     // this.transform.up is the direction the player faces
                     Projectile bullet = Instantiate(
@@ -117,7 +120,7 @@ public class Champion : MonoBehaviour
             swordCooldownLeft -= Time.fixedDeltaTime;
             if (swordCooldownLeft <= 0) // able to attack with sword
             {
-                if (Input.GetKey("j"))
+                if (Input.GetMouseButton(0))
                 {
                     // this.transform.up is the direction the player faces
                     GameObject sword = Instantiate(
