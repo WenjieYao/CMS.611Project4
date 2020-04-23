@@ -68,8 +68,6 @@ public class Champion : MonoBehaviour
         if (Input.GetKey("a")) { translateDir += Vector2.left; }
         if (Input.GetKey("s")) { translateDir += Vector2.down; }
         if (Input.GetKey("d")) { translateDir += Vector2.right; }
-        // The 100 factor here should stay constant.
-        // Change mass to change movement speed.
         translateDir.Normalize();
 
         if (iceMap.HasTile(iceMap.WorldToCell(this.transform.position)))
