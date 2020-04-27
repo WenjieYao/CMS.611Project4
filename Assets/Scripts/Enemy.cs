@@ -16,8 +16,6 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	private GameObject target = null;
     public AIPath aiPath;
-	// Current rigidbody2d object
-    private Rigidbody2D rigidbody2D;
     //Enemy movement speed
     [SerializeField]
     private float speed = 1.0f;
@@ -93,7 +91,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
         health = maxHealth;
     }
 
@@ -112,7 +109,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    void OnCollisionStay2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collisionGameObj = collision.gameObject;
 
@@ -121,14 +118,16 @@ public class Enemy : MonoBehaviour
         {
             collisionGameObj.GetComponent<Champion>().DealChampionDamage(attackPower);
         }
-        if (collision.gameObject.CompareTag("projectile") && this.CompareTag("enemyblue"))
+        if (collision.gameObject.tag.Equals("projectile") && this.tag.Equals("enemyblue"))
         {
+            
             health = health - 1;
             if (health <= 0)
             { Destroy(gameObject); }
         }
-        if (collision.gameObject.CompareTag("attack") && this.CompareTag("enemygreen"))
+        if (collision.gameObject.tag.Equals("attack") && this.tag.Equals("enemygreen"))
         {
+            Debug.Log("say");
             health = health - 3;
             if (health <= 0)
             { Destroy(gameObject); }

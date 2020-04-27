@@ -75,7 +75,7 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
     	//if projectile hits the wall, destroy projectile
-    	if(collision.gameObject.tag.Equals("Wall")){
+    	if(!collision.gameObject.tag.Equals("Player")){
     		Destroy(this.gameObject);
     	}
 
