@@ -5,10 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
-  - attack
-  - enemygreen
-  - enemyblue
-  - projectile
+  - sword
+  - bulletP
+  - bulletY
   layers:
   - Default
   - TransparentFX

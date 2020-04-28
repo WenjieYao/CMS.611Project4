@@ -57,7 +57,7 @@ public class Spawner : MonoBehaviour
 	            // Set enemy target
 	            Debug.Log(newEnemy);
 
-	            newEnemy.GetComponent<Enemy>().Target = target;
+	            newEnemy.GetComponent<Enemy>().target = target;
 	        }
     	}
     }

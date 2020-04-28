@@ -108,7 +108,7 @@ public class Champion : MonoBehaviour
                         this.transform.position + this.transform.up,
                         Quaternion.identity
                     ).GetComponent<Projectile>();
-                    bullet.SetTrajectory(this.transform.up);
+                    bullet.Direction = this.transform.up;
                     gunCooldownLeft = gunCooldownSecs;
                 }
             }

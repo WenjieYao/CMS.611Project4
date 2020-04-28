@@ -8,36 +8,12 @@ public class Projectile : MonoBehaviour
     /****************************************************/
     /***************** Basic Properties *****************/
     /****************************************************/
-	[SerializeField]
-	private float velocity = 8.0f;
-	// A normalized vector representing the projectile's trajectory
-	private Vector2 trajectory;
-
-
-    /****************************************************/
-    // Public properties that corresponds to the private
-    // properties above
-    /****************************************************/
-	public float Velocity
-	{
-		get{
-			return velocity;
-		}
-		set
-		{
-			this.velocity = value;
-		}
-	}
-
-    public Vector2 Trajectory
+    public float speed = 8.0f;
+    private Vector2 direction;
+    public Vector2 Direction
     {
-        get{
-            return trajectory;
-        }
-        set
-        {
-            this.trajectory = value;
-        }
+        get { return direction; }
+        set { direction = value.normalized; }
     }
 
     /****************************************************/
@@ -46,38 +22,21 @@ public class Projectile : MonoBehaviour
     /***************** Basic Functions ******************/
     /****************************************************/
     // Start is called before the first frame update
-    void Start()
+    void Start() { }
+
+    void FixedUpdate()
     {
-        
+        // Move the projectile according to its velocity and trajectory
+        transform.Translate(speed * direction * Time.fixedDeltaTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }
-
-    void FixedUpdate(){
-    	MoveProjectile();
-    }
-
-    /*Set the trajectory of the projectile*/
-    public void SetTrajectory(Vector2 trajectory){
-    	this.trajectory = trajectory.normalized;
-    }
-
-    /*Move the projectile according to its velocity and trajectory*/
-    public void MoveProjectile(){
-    	transform.Translate(trajectory * velocity * Time.fixedDeltaTime);
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-    	//if projectile hits the wall, destroy projectile
-    	if(!collision.gameObject.tag.Equals("Player")){
-    		Destroy(this.gameObject);
-    	}
-
+        // if projectile hits something other than player,
+        // destroy projectile
+        if (!collision.gameObject.tag.Equals("Player"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

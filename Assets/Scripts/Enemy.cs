@@ -13,76 +13,17 @@ public class Enemy : MonoBehaviour
     /***************** Basic Properties *****************/
     /****************************************************/
     // Enemy's attacking target
-	[SerializeField]
-	private GameObject target = null;
-    public AIPath aiPath;
-    //Enemy movement speed
-    [SerializeField]
-    private float speed = 1.0f;
-    private int health;
-    [SerializeField]
-    private int maxHealth = 5;
-    [SerializeField]
-    private int attackPower = 1;
+    public GameObject target = null;
     private bool sensedTarget = false;
 
-	public GameObject Target
-	{
-		get{
-			return target;
-		}
-		set
-		{
-			this.target = value;
-		}
-	}
+    public int maxHealth = 5;
+    public int health;
 
-    public float Speed{
-        get
-        {
-            return speed;
-        }
-        set
-        {
-            this.speed = value;
-        }
-    }
+    public int attackPower = 1;
 
-    public int Health{
-        get
-        {
-            return health;
-        }
-        set
-        {
-            this.health = value;
-        }
-    }
-
-    public int MaxHealth{
-        get
-        {
-            return maxHealth;
-        }
-        set
-        {
-            this.maxHealth = value;
-        }
-    }
-
-
-    public int AttackPower{
-        get
-        {
-            return attackPower;
-        }
-        set
-        {
-            this.attackPower = value;
-        }
-    }
-
-
+    // Tags of champion attack prefabs that the enemy takes damage from.
+    public List<GameObject> vulnerableAttackPrefabs;
+    public List<string> vulnerableAttackTags;
     /****************************************************/
 
     /****************************************************/
@@ -92,55 +33,78 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        foreach (var attack in vulnerableAttackPrefabs)
+        {
+            vulnerableAttackTags.Add(attack.tag);
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
-    {   
-            //Once target has been sensed, move to target. This happens even if the character moves out of range again.
-            if(sensedTarget)
-            {
-                aiPath.canSearch = true;
-                //Vector2 moveDirection = (Vector2)(target.transform.position - transform.position);
-                //rigidbody2D.MovePosition(rigidbody2D.position + moveDirection * speed * Time.fixedDeltaTime);
-                //sensedTarget = false;
-            }
-
+    {
+        // Once target has been sensed, move to target.
+        // This happens even if the character moves out of range again.
+        if (sensedTarget)
+        {
+            GetComponent<AIDestinationSetter>().target = target.transform;
+            GetComponent<AIPath>().canSearch = true;
+        }
     }
-
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject collisionGameObj = collision.gameObject;
+        // If enemy hits player, inflict damage on champion
+        if (collision.gameObject.GetComponent<Champion>() != null)
+        {
+            collision.gameObject.GetComponent<Champion>().DealChampionDamage(attackPower);
+        }
 
-        //if enemy hits player, inflict damage on champion
-        if(collisionGameObj.GetComponent<Champion>() != null)
+        if (vulnerableAttackTags.Contains(collision.gameObject.tag))
         {
-            collisionGameObj.GetComponent<Champion>().DealChampionDamage(attackPower);
+            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                TakeDamage(1);
+                StartCoroutine(
+                    Knockback(10 * projectile.Direction, 0.25f)
+                );
+            }
         }
-        if (collision.gameObject.tag.Equals("projectile") && this.tag.Equals("enemyblue"))
+
+        // This is broken :(
+        if (collision.gameObject.tag.Equals("sword") && this.tag.Equals("enemygreen"))
         {
-            
-            health = health - 1;
-            if (health <= 0)
-            { Destroy(gameObject); }
-        }
-        if (collision.gameObject.tag.Equals("attack") && this.tag.Equals("enemygreen"))
-        {
-            Debug.Log("say");
-            health = health - 3;
-            if (health <= 0)
-            { Destroy(gameObject); }
+            Debug.Log("Enemy attacked by sword");
+            TakeDamage(3);
         }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-        GameObject collisionGameObj = other.gameObject;
-        //Handles circle collider behavior. If enemy is in range of target, enable moving to target
-        if (collisionGameObj == target)
+        // If enemy is in range of target, enable moving to target
+        if (other.gameObject.tag.Equals("Player"))
         {
+            target = other.gameObject;
             sensedTarget = true;
+        }
+    }
+
+    void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+        if (health <= 0) { Destroy(gameObject); }
+    }
+
+    IEnumerator Knockback(Vector2 velocity, float duration)
+    {
+        float elapsed = 0;
+        while (elapsed < duration)
+        {
+            Vector2 curVelocity = Vector2.Lerp(velocity, Vector2.zero, elapsed / duration);
+            GetComponent<AIPath>().Move(curVelocity * Time.deltaTime);
+
+            elapsed += Time.deltaTime;
+            yield return null;
         }
     }
 }

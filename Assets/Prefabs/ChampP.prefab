@@ -146,11 +146,13 @@ MonoBehaviour:
   playerCanControl: 0
   translateForce: 50
   torqueForce: 3
+  iceMap: {fileID: 0}
+  iceDrag: 1
   maxHealth: 0
   curHealth: 0
   dmgCooldownSecs: 0.5
   championWeapon: 0
-  bulletPrefab: {fileID: 6509681810872337612, guid: ebe70528cc7c64c0b982498bfdc9a6d3,
+  bulletPrefab: {fileID: 1176027336530916652, guid: b1cbc74a790234b2d8f6339417e3142c,
     type: 3}
   gunCooldownSecs: 0.25
   swordPrefab: {fileID: 3792277620117432578, guid: aeb5f42dc12ee8d46802034b6034db5d,
