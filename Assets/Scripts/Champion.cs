@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 /*
  * The Player script is used for defining player
@@ -19,8 +20,8 @@ public class Champion : MonoBehaviour
     public float iceDrag = 1;
     private float originalDrag;
 
-    public int maxHealth;
-    public int curHealth; // current health
+    private int maxHealth = 10;
+    private int curHealth; // current health
 
     private float dmgCooldownTimer;
     public float dmgCooldownSecs = 0.5f; // time invulnerable after taking damge
@@ -36,6 +37,8 @@ public class Champion : MonoBehaviour
     public float swordExistSecs = 0.75f;
     public float swordCooldownSecs = 1f;
     private float swordCooldownLeft = 0;
+
+    public Slider slider;
     /****************************************************/
 
     /****************************************************/
@@ -46,7 +49,8 @@ public class Champion : MonoBehaviour
     {
         // Initialize player with full health
         curHealth = maxHealth;
-
+        slider.maxValue = maxHealth;
+        slider.value = curHealth;
         // Invulnerable when spawned.
         dmgCooldownTimer = dmgCooldownSecs;
 
@@ -137,23 +141,36 @@ public class Champion : MonoBehaviour
     // Champion takes {damage} damage to health at most once per maxDmgCooldown
     public void DealChampionDamage(int damage)
     {
-        dmgCooldownTimer -= Time.fixedDeltaTime;
-        if (dmgCooldownTimer <= 0)
+        curHealth -= damage;
+        slider.value = curHealth;
+        if (curHealth <= 0)
         {
-            curHealth -= damage;
-            Debug.Log(curHealth + "/" + maxHealth);
-            if (curHealth < 0)
-            {
-                Die();
-            }
-            dmgCooldownTimer = dmgCooldownSecs;
+            Die();
         }
     }
 
     void Die()
     {
-        curHealth = 0;
-        Debug.Log("Died");
+        GameManager.Instance.GameOver.SetActive(true);
+        Destroy(gameObject);
         // TODO: Trigger Game Over popup
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Ending"))
+        {
+            GameManager.Instance.Win.SetActive(true);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        // If enemy is in range of target, enable moving to target
+        if (other.gameObject.tag.Equals("Chasms"))
+        {
+            GameManager.Instance.GameOver.SetActive(true);
+            Destroy(gameObject);
+        }
     }
 }

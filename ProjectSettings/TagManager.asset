@@ -8,6 +8,8 @@ TagManager:
   - sword
   - bulletP
   - bulletY
+  - Ending
+  - Chasms
   layers:
   - Default
   - TransparentFX

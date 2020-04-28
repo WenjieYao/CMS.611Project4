@@ -43,7 +43,8 @@ public class GameManager : Singleton<GameManager>
     {
         
     }
-
+    public GameObject GameOver;
+    public GameObject Win;
     // Function to end game
     public void QuitGame()
     {

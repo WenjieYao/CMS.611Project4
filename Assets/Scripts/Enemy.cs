@@ -54,9 +54,10 @@ public class Enemy : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // If enemy hits player, inflict damage on champion
-        if (collision.gameObject.GetComponent<Champion>() != null)
+        if (collision.gameObject.tag.Equals("Player"))
         {
             collision.gameObject.GetComponent<Champion>().DealChampionDamage(attackPower);
+            Destroy(gameObject);
         }
 
         if (vulnerableAttackTags.Contains(collision.gameObject.tag))
