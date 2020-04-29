@@ -137,8 +137,7 @@ MonoBehaviour:
   translateForce: 100
   iceMap: {fileID: 0}
   iceDrag: 1
-  maxHealth: 5
-  curHealth: 0
+  maxHealth: 16
   healthBarSlider: {fileID: 0}
   takeDamageAudioPrefab: {fileID: 2418889052934205505, guid: 57da714ca8311434bae6090fa839004a,
     type: 3}

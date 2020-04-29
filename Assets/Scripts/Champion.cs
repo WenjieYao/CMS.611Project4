@@ -21,7 +21,6 @@ public class Champion : MonoBehaviour
     private float originalDrag;
 
     public int maxHealth = 5;
-    public int curHealth; // current health
     public Slider healthBarSlider; // for healthbar
     public AudioSource takeDamageAudioPrefab;
 
@@ -45,10 +44,8 @@ public class Champion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Initialize player with full health
-        curHealth = maxHealth;
         healthBarSlider.maxValue = maxHealth;
-        healthBarSlider.value = curHealth;
+        healthBarSlider.value = maxHealth;
         // Invulnerable when spawned.
         dmgCooldownTimer = dmgCooldownSecs;
 
@@ -74,7 +71,7 @@ public class Champion : MonoBehaviour
         Tilemap chasmMap = GameObject.FindGameObjectWithTag("Chasms").GetComponent<Tilemap>();
         if (chasmMap.HasTile(chasmMap.WorldToCell(this.transform.position)))
         {
-            Die();
+            DealChampionDamage(1000);
         }
 
         FixedUpdateGunAudioState();
@@ -146,13 +143,12 @@ public class Champion : MonoBehaviour
     // Champion takes {damage} damage to health at most once per maxDmgCooldown
     public void DealChampionDamage(int damage)
     {
-        curHealth -= damage;
-        healthBarSlider.value = curHealth;
+        healthBarSlider.value -= damage; // TODO: Refactor so we don't break abstraction.
         GameManager.Instance.globalAudioSource.PlayOneShot(
             takeDamageAudioPrefab.clip,
             takeDamageAudioPrefab.volume
         );
-        if (curHealth <= 0) { Die(); }
+        if (healthBarSlider.value <= 0) { Die(); }
     }
 
     void Die()
@@ -167,6 +163,8 @@ public class Champion : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Ending"))
         {
+            GameObject.FindGameObjectWithTag("bg-music").GetComponent<AudioSource>().Stop();
+            healthBarSlider.value = healthBarSlider.maxValue = 1000000000;
             GameManager.Instance.Win.SetActive(true);
         }
     }
