@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8904423089469214288}
   - component: {fileID: 8904423089469214291}
   - component: {fileID: 8904423089469214290}
-  - component: {fileID: -8818376122633611144}
   - component: {fileID: -1409373699639407300}
+  - component: {fileID: -8818376122633611144}
   m_Layer: 0
   m_Name: ChampP
   m_TagString: Player
@@ -105,33 +105,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-8818376122633611144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8904423089469214292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0edf499ce5093435692eef612f77cf58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCanControl: 0
-  translateForce: 100
-  torqueForce: 3
-  iceMap: {fileID: 0}
-  iceDrag: 1
-  dmgCooldownSecs: 0.5
-  championWeapon: 0
-  bulletPrefab: {fileID: 1176027336530916652, guid: b1cbc74a790234b2d8f6339417e3142c,
-    type: 3}
-  gunCooldownSecs: 0.1
-  swordPrefab: {fileID: 3792277620117432578, guid: aeb5f42dc12ee8d46802034b6034db5d,
-    type: 3}
-  swordExistSecs: 0.75
-  swordCooldownSecs: 1
-  slider: {fileID: 0}
 --- !u!58 &-1409373699639407300
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -148,3 +121,35 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!114 &-8818376122633611144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904423089469214292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edf499ce5093435692eef612f77cf58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCanControl: 0
+  translateForce: 100
+  iceMap: {fileID: 0}
+  iceDrag: 1
+  maxHealth: 5
+  curHealth: 0
+  healthBarSlider: {fileID: 0}
+  takeDamageAudioPrefab: {fileID: 2418889052934205505, guid: 57da714ca8311434bae6090fa839004a,
+    type: 3}
+  dmgCooldownSecs: 0.5
+  championWeapon: 0
+  bulletPrefab: {fileID: 1176027336530916652, guid: b1cbc74a790234b2d8f6339417e3142c,
+    type: 3}
+  gunAudioPrefab: {fileID: 4154429321257224029, guid: a773693b74e1c455db70a55c6b1d5ed4,
+    type: 3}
+  gunCooldownSecs: 0.1
+  swordPrefab: {fileID: 3792277620117432578, guid: aeb5f42dc12ee8d46802034b6034db5d,
+    type: 3}
+  swordExistSecs: 0.75
+  swordCooldownSecs: 1

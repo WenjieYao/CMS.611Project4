@@ -21,10 +21,14 @@ public class Enemy : MonoBehaviour
     public int health;
 
     public int attackPower = 1;
+    public float knockbackPower = 3f;
 
     // Tags of champion attack prefabs that the enemy takes damage from.
     public List<GameObject> vulnerableAttackPrefabs;
     public List<string> vulnerableAttackTags;
+
+    public AudioSource bulletBounceAudioPrefab;
+    public AudioSource takeDamageAudioPrefab;
     /****************************************************/
 
     /****************************************************/
@@ -55,19 +59,22 @@ public class Enemy : MonoBehaviour
         Tilemap chasmMap = GameObject.FindGameObjectWithTag("Chasms").GetComponent<Tilemap>();
         if (chasmMap.HasTile(chasmMap.WorldToCell(this.transform.position)))
         {
-            Destroy(gameObject);
+            TakeDamage(10000);
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // If enemy hits player, inflict damage on champion
-        if (collision.gameObject.tag.Equals("Player"))
+        Champion champ = collision.gameObject.GetComponent<Champion>();
+        if (champ != null) // Enemy hits player
         {
-            collision.gameObject.GetComponent<Champion>().DealChampionDamage(attackPower);
+            champ.DealChampionDamage(attackPower); // deal damage to champion
+            champ.GetComponent<Rigidbody2D>().AddForce( // knockback
+                knockbackPower * GetComponent<Rigidbody2D>().velocity.normalized,
+                mode: ForceMode2D.Impulse
+            );
             Destroy(gameObject);
         }
-
 
         Projectile projectile = collision.gameObject.GetComponent<Projectile>();
         if (projectile != null)
@@ -75,9 +82,16 @@ public class Enemy : MonoBehaviour
             if (vulnerableAttackTags.Contains(projectile.tag))
             {
                 TakeDamage(1);
-                StartCoroutine(Knockback(10 * projectile.Direction, 0.25f));
+                StartCoroutine(Knockback(projectile.velocity, 0.25f));
             }
-            else { StartCoroutine(Knockback(10 * projectile.Direction, 0.25f)); }
+            else
+            {
+                StartCoroutine(Knockback(projectile.velocity, 0.25f));
+                GameManager.Instance.globalAudioSource.PlayOneShot(
+                    bulletBounceAudioPrefab.clip,
+                    bulletBounceAudioPrefab.volume
+                );
+            }
         }
 
         // This is broken :(
@@ -101,6 +115,10 @@ public class Enemy : MonoBehaviour
     void TakeDamage(int damageAmount)
     {
         health -= damageAmount;
+        GameManager.Instance.globalAudioSource.PlayOneShot(
+            takeDamageAudioPrefab.clip,
+            takeDamageAudioPrefab.volume
+        );
         if (health <= 0) { Destroy(gameObject); }
     }
 

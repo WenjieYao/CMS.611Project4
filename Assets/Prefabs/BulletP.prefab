@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9159126658044609030}
   - component: {fileID: 593171914038129670}
-  - component: {fileID: 7441485183237114625}
   - component: {fileID: 6380863003212591388}
   - component: {fileID: 6820640365174286497}
   - component: {fileID: 4144251303247598231}
+  - component: {fileID: 7441485183237114625}
   m_Layer: 0
   m_Name: BulletP
   m_TagString: bulletP
@@ -85,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7441485183237114625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1176027336530916652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b31d4a0c9964028a9dbe62c241dc80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
 --- !u!50 &6380863003212591388
 Rigidbody2D:
   serializedVersion: 4
@@ -171,3 +158,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.37242448, y: 0.34457368}
   m_EdgeRadius: 0
+--- !u!114 &7441485183237114625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176027336530916652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b31d4a0c9964028a9dbe62c241dc80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToLive: 1
+  spawnSpeed: 8
+  velocity: {x: 0, y: 0}

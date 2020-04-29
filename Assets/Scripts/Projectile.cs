@@ -4,35 +4,29 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
     /****************************************************/
     /***************** Basic Properties *****************/
     /****************************************************/
-    public float timeToLive = 1f;
-    public float speed = 8.0f;
-    private Vector2 direction;
-    public Vector2 Direction
-    {
-        get { return direction; }
-        set { direction = value.normalized; }
-    }
-
+    public float timeToLive = 2f;
+    public float spawnSpeed = 8.0f;
+    public Vector2 velocity;
     /****************************************************/
 
-    /****************************************************/
-    /***************** Basic Functions ******************/
-    /****************************************************/
     // Start is called before the first frame update
-    void Start() {}
+    void Start() { }
+
+    // Sets velocity
+    public void Fire(Rigidbody2D gun, Vector2 direction)
+    {
+        velocity = gun.velocity + direction * spawnSpeed;
+    }
 
     void FixedUpdate()
     {
         // Move the projectile according to its velocity and trajectory
-        transform.Translate(speed * direction * Time.fixedDeltaTime);
+        transform.Translate(velocity * Time.fixedDeltaTime);
 
-        if (timeToLive < 0) {
-            Destroy(gameObject);
-        }
+        if (timeToLive < 0) { Destroy(gameObject); }
         timeToLive -= Time.fixedDeltaTime;
     }
 

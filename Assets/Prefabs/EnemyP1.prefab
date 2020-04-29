@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: -994833809
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d38caa85ddd165444b2b4e481b96db3b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2af5dd4dc3aa8491e8940886744fa6a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5870669608725558557}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -232,9 +232,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  maxHealth: 3
+  maxHealth: 5
   health: 0
   attackPower: 1
+  knockbackPower: 3
   vulnerableAttackPrefabs:
-  - {fileID: 5167006666281808491, guid: 8566578f2ea8040b499154d85de9eb01, type: 3}
+  - {fileID: 1176027336530916652, guid: b1cbc74a790234b2d8f6339417e3142c, type: 3}
   vulnerableAttackTags: []
+  bulletBounceAudioPrefab: {fileID: 2008490443109671953, guid: f2c625e5f3797458e98bc2eb0d36a753,
+    type: 3}
+  takeDamageAudioPrefab: {fileID: 4251249432018809184, guid: 43d8ccea3e50d4deba64f99f026c126c,
+    type: 3}

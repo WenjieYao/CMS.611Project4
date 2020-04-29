@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 /****************************************************/
-// The Game Manager script is used for all game 
+// The Game Manager script is used for all game
 // control functionalities and record current
 // game status
 /****************************************************/
@@ -14,18 +14,19 @@ public class GameManager : Singleton<GameManager>
 {
     /****************************************************/
     /************* Game Control Parameters **************/
-    
+
+    public AudioSource globalAudioSource;
 
     /****************************************************/
     /************ Basic Properties (private) ************/
     /****************************************************/
-    
+
 
     /****************************************************/
     // Public properties that corresponds to the private
     // properties above
     /****************************************************/
-    
+
     /****************************************************/
 
 
@@ -35,13 +36,13 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        globalAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+
     }
     public GameObject GameOver;
     public GameObject Win;
