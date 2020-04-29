@@ -20,7 +20,7 @@ public class Champion : MonoBehaviour
     public float iceDrag = 1;
     private float originalDrag;
 
-    private int maxHealth = 10;
+    private int maxHealth = 5;
     private int curHealth; // current health
 
     private float dmgCooldownTimer;

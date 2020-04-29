@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
             {
                 TakeDamage(1);
                 StartCoroutine(
-                    Knockback(10 * projectile.Direction, 0.25f)
+                    Knockback(0 * projectile.Direction, 0.25f)
                 );
             }
         }
