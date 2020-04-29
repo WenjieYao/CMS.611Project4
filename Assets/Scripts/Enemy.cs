@@ -82,11 +82,11 @@ public class Enemy : MonoBehaviour
             if (vulnerableAttackTags.Contains(projectile.tag))
             {
                 TakeDamage(1);
-                StartCoroutine(Knockback(projectile.velocity, 0.25f));
+                StartCoroutine(Knockback(projectile.velocity, 0.2f));
             }
             else
             {
-                StartCoroutine(Knockback(projectile.velocity, 0.25f));
+                StartCoroutine(Knockback(projectile.velocity, 0.2f));
                 GameManager.Instance.globalAudioSource.PlayOneShot(
                     bulletBounceAudioPrefab.clip,
                     bulletBounceAudioPrefab.volume
