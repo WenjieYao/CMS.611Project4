@@ -16,6 +16,7 @@ public class GameManager : Singleton<GameManager>
     /************* Game Control Parameters **************/
 
     public AudioSource globalAudioSource;
+    public float globalListenerVolume = 0.1f;
 
     /****************************************************/
     /************ Basic Properties (private) ************/
@@ -37,6 +38,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         globalAudioSource = gameObject.AddComponent<AudioSource>();
+        AudioListener.volume = globalListenerVolume;
     }
 
     // Update is called once per frame
