@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
     {
         // if projectile hits something other than player,
         // destroy projectile
-        if (!collision.gameObject.tag.Equals("Player"))
+        if (!collision.gameObject.tag.Equals("Player") && !collision.gameObject.tag.Contains("bullet"))
         {
             Destroy(gameObject);
         }
