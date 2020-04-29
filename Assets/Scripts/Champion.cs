@@ -62,6 +62,13 @@ public class Champion : MonoBehaviour
     {
         // Only handle player input if playerCanControl
         if (playerCanControl) { HandlePlayerControls(); }
+
+        // Die when go over chasm.
+        Tilemap chasmMap = GameObject.FindGameObjectWithTag("Chasms").GetComponent<Tilemap>();
+        if (chasmMap.HasTile(chasmMap.WorldToCell(this.transform.position)))
+        {
+            Die();
+        }
     }
 
     private void HandlePlayerControls()
@@ -161,16 +168,6 @@ public class Champion : MonoBehaviour
         if (collision.gameObject.tag.Equals("Ending"))
         {
             GameManager.Instance.Win.SetActive(true);
-        }
-    }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        // If enemy is in range of target, enable moving to target
-        if (other.gameObject.tag.Equals("Chasms"))
-        {
-            GameManager.Instance.GameOver.SetActive(true);
-            Destroy(gameObject);
         }
     }
 }
