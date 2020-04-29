@@ -158,6 +158,7 @@ public class Champion : MonoBehaviour
     void Die()
     {
         GameManager.Instance.GameOver.SetActive(true);
+        GameObject.FindGameObjectWithTag("bg-music").GetComponent<AudioSource>().Stop();
         Destroy(gameObject);
         // TODO: Trigger Game Over popup
     }
