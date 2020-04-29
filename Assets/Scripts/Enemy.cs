@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Pathfinding;
 
 /****************************************************/
@@ -49,6 +50,13 @@ public class Enemy : MonoBehaviour
             GetComponent<AIDestinationSetter>().target = target.transform;
             GetComponent<AIPath>().canSearch = true;
         }
+
+        // Die when go over chasm.
+        Tilemap chasmMap = GameObject.FindGameObjectWithTag("Chasms").GetComponent<Tilemap>();
+        if (chasmMap.HasTile(chasmMap.WorldToCell(this.transform.position)))
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -60,16 +68,16 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (vulnerableAttackTags.Contains(collision.gameObject.tag))
+
+        Projectile projectile = collision.gameObject.GetComponent<Projectile>();
+        if (projectile != null)
         {
-            Projectile projectile = collision.gameObject.GetComponent<Projectile>();
-            if (projectile != null)
+            if (vulnerableAttackTags.Contains(projectile.tag))
             {
                 TakeDamage(1);
-                StartCoroutine(
-                    Knockback(0 * projectile.Direction, 0.25f)
-                );
+                StartCoroutine(Knockback(10 * projectile.Direction, 0.25f));
             }
+            else { StartCoroutine(Knockback(10 * projectile.Direction, 0.25f)); }
         }
 
         // This is broken :(
