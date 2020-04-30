@@ -11,6 +11,7 @@ TagManager:
   - Ending
   - Chasms
   - bg-music
+  - MiniCamera
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - 
   - 
   - Obstacle
-  - 
-  - 
+  - MainCamera
+  - MiniCamera
   - 
   - 
   - 

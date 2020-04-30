@@ -14,6 +14,7 @@ public class ChampionController : Singleton<ChampionController>
     public Champion[] champions;
     public int activeChampionIdx = 0;
     public CinemachineVirtualCamera activeChampionCamera;
+    public CinemachineVirtualCamera activeChampionMiniCamera;
     /****************************************************/
 
     /****************************************************/
@@ -45,5 +46,6 @@ public class ChampionController : Singleton<ChampionController>
         activeChampionIdx = idx;
         champions[activeChampionIdx].playerCanControl = true;
         activeChampionCamera.Follow = champions[activeChampionIdx].transform;
+        activeChampionMiniCamera.Follow = champions[activeChampionIdx].transform;
     }
 }
