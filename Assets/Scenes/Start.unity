@@ -1650,12 +1650,39 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This is help. This is help. This is help. This is help. This is help.
-    This is help. This is help. This is help. This is help. This is help. This is
-    help. This is help. This is help. This is help. This is help. This is help. This
-    is help. This is help. This is help. This is help. This is help. This is help.
-    This is help. This is help. This is help. This is help. This is help. This is
-    help. This is help. This is help. This is help. This is help. '
+  m_text: 'It is the year 202X. Humanity has succumbed to coronavirus. Half of the
+    world''s population have turned into purple circles and the other half...yellow
+    circles. Doctors have been turning their minds over for an explanation, but so
+    far, there is none.
+
+
+    That''s fine, you say. You just want to know why you''re
+    in a pit-infested ice castle with enemies attacking you, or why you can suddenly
+    control your yellow-circled best friend''s body, or where you got these bullets
+    from...
+
+
+    Didn''t you hear me the first time? You ask for an explanation,
+    but there is none.
+
+
+    Here are some explanations you can have:
+
+
+    - Use
+    WASD to move
+
+    - Hold down the mouse to shoot bullets in the mouse''s direction
+
+    -
+    The bullets you shoot can only damage enemies of the same color
+
+    - Use the
+    space bar to change which body you''re controlling
+
+
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1683,8 +1710,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1721,7 +1748,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 20, z: 20, w: 20}
   m_textInfo:
     textComponent: {fileID: 594530048}
     characterCount: 448
